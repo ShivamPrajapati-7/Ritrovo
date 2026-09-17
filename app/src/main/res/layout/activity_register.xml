@@ -2,24 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/stock"
         android:layout_marginBottom="30dp"/>
 
     <com.google.android.material.textfield.MaterialAutoCompleteTextView
-        android:id="@+id/email"
+        android:id="@+id/regEmail"
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:padding="25dp"
@@ -29,30 +29,41 @@
         android:background="@drawable/inputfield"/>
 
     <com.google.android.material.textfield.MaterialAutoCompleteTextView
-        android:id="@+id/password"
+        android:id="@+id/regPassword"
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:padding="25dp"
         android:hint="@string/password"
         android:inputType="textPassword"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/inputfield"/>
+
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:id="@+id/regConfirmPassword"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:padding="25dp"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/inputfield"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnlogin"
+        android:id="@+id/btnRegister"
         android:layout_width="300dp"
         android:layout_height="65dp"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textColor="@color/stock"
         android:background="@drawable/btnst"
         app:backgroundTint="@null"
         android:textStyle="bold"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
-        android:id="@+id/tvRegister"
+        android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dont_have_account"
+        android:text="@string/already_have_account"
         android:textColor="@color/stock"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
