@@ -1,130 +1,82 @@
 package com.humanoide.ritrovo
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
-import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.humanoide.ritrovo.databinding.ActivityRegisterBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var myauth: FirebaseAuth
+    private lateinit var email: EditText
+    private lateinit var password: EditText
+    private lateinit var confirmPassword: EditText
+    private lateinit var btnRegister: Button
+    private lateinit var tvLogin: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_register)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.registerScrollView) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.register)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        setupClickListeners()
-    }
+        // Initialize Firebase Auth
+        myauth = FirebaseAuth.getInstance()
 
-    private fun setupClickListeners() {
-        // Register button click
-        binding.btnRegister.setOnClickListener {
-            performRegistration()
-        }
+        email = findViewById(R.id.regEmail)
+        password = findViewById(R.id.regPassword)
+        confirmPassword = findViewById(R.id.regConfirmPassword)
+        btnRegister = findViewById(R.id.btnRegister)
+        tvLogin = findViewById(R.id.tvLogin)
 
-        // Navigate back to Login Activity
-        binding.tvLogin.setOnClickListener {
-            finish()
-        }
-    }
+        btnRegister.setOnClickListener {
+            val emailInput = email.text.toString().trim()
+            val passInput = password.text.toString().trim()
+            val confirmPassInput = confirmPassword.text.toString().trim()
 
-    private fun performRegistration() {
-        val fullName = binding.etFullName.text?.toString()?.trim().orEmpty()
-        val email = binding.etEmail.text?.toString()?.trim().orEmpty()
-        val password = binding.etPassword.text?.toString()?.trim().orEmpty()
-        val confirmPassword = binding.etConfirmPassword.text?.toString()?.trim().orEmpty()
-
-        // Clear previous errors
-        binding.tilFullName.error = null
-        binding.tilEmail.error = null
-        binding.tilPassword.error = null
-        binding.tilConfirmPassword.error = null
-
-        // Input validation
-        if (fullName.isEmpty()) {
-            binding.tilFullName.error = getString(R.string.err_empty_name)
-            binding.etFullName.requestFocus()
-            return
-        }
-
-        if (email.isEmpty()) {
-            binding.tilEmail.error = getString(R.string.err_empty_email)
-            binding.etEmail.requestFocus()
-            return
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.tilEmail.error = getString(R.string.err_invalid_email)
-            binding.etEmail.requestFocus()
-            return
-        }
-
-        if (password.isEmpty()) {
-            binding.tilPassword.error = getString(R.string.err_empty_password)
-            binding.etPassword.requestFocus()
-            return
-        }
-
-        if (password.length < 6) {
-            binding.tilPassword.error = getString(R.string.err_short_password)
-            binding.etPassword.requestFocus()
-            return
-        }
-
-        if (password != confirmPassword) {
-            binding.tilConfirmPassword.error = getString(R.string.err_password_mismatch)
-            binding.etConfirmPassword.requestFocus()
-            return
-        }
-
-        // Selected Role
-        val selectedRole = if (binding.toggleGroupRole.checkedButtonId == R.id.btnRoleOwner) {
-            "Canteen Owner"
-        } else {
-            "Student"
-        }
-
-        setLoading(true)
-
-        // TODO: Replace this block with Firebase Authentication & Firestore user creation logic
-        // E.g., FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)...
-        // and saving user details (fullName, email, role) to Firestore collection "users"
-        binding.root.postDelayed({
-            setLoading(false)
-            Toast.makeText(this, getString(R.string.msg_register_success), Toast.LENGTH_SHORT).show()
-
-            // Navigate to Home Dashboard
-            val intent = Intent(this, HomeActivity::class.java).apply {
-                putExtra("USER_EMAIL", email)
-                putExtra("USER_NAME", fullName)
-                putExtra("USER_ROLE", selectedRole)
+            if (emailInput.isEmpty()) {
+                email.error = "Email is required"
+                return@setOnClickListener
             }
-            startActivity(intent)
-            finishAffinity()
-        }, 1000)
-    }
 
-    private fun setLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-            binding.btnRegister.isEnabled = false
-        } else {
-            binding.progressBar.visibility = View.GONE
-            binding.btnRegister.isEnabled = true
+            if (passInput.isEmpty()) {
+                password.error = "Password is required"
+                return@setOnClickListener
+            }
+
+            if (passInput.length < 6) {
+                password.error = "Password must be at least 6 characters"
+                return@setOnClickListener
+            }
+
+            if (passInput != confirmPassInput) {
+                confirmPassword.error = "Passwords do not match"
+                return@setOnClickListener
+            }
+
+            myauth.createUserWithEmailAndPassword(emailInput, passInput)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Registered Successfully!", Toast.LENGTH_SHORT).show()
+                    finish() // Close RegisterActivity and return to Login
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(this, "Registration Failed: ${exception.localizedMessage}", Toast.LENGTH_LONG).show()
+                }
+        }
+
+        tvLogin.setOnClickListener {
+            finish() // Close RegisterActivity and return to Login
         }
     }
 }

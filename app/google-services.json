@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "196343192491",
+    "project_id": "ritrovo-c4469",
+    "storage_bucket": "ritrovo-c4469.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196343192491:android:49c7d395059ed8cb7a90ee",
+        "android_client_info": {
+          "package_name": "com.humanoide.ritrovo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFmTc2H5CI-9ox9ord-EyyDy5BWjDQwL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

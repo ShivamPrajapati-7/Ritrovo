@@ -21,23 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Register Activity -->
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-
-        <!-- Home Activity -->
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-
-        <!-- Main Activity -->
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-
     </application>
 
 </manifest>

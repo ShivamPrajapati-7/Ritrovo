@@ -1,44 +1,10 @@
 <resources>
     <string name="app_name">Ritrovo</string>
-    <string name="app_tagline">Campus Canteens at your Fingertips</string>
-
-    <!-- Role Options -->
-    <string name="role_student">Student</string>
-    <string name="role_owner">Canteen Owner</string>
-    <string name="select_role">Select Your Role</string>
-
-    <!-- Login Screen -->
-    <string name="login_title">Welcome Back!</string>
-    <string name="login_subtitle">Sign in to explore canteens and order food</string>
-    <string name="hint_email">Campus Email</string>
-    <string name="hint_password">Password</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="btn_login">Login</string>
-    <string name="no_account_prompt">Don\'t have an account? </string>
-    <string name="btn_register_now">Register Now</string>
-
-    <!-- Register Screen -->
-    <string name="register_title">Create Account</string>
-    <string name="register_subtitle">Join Ritrovo to order food or manage your canteen</string>
-    <string name="hint_full_name">Full Name</string>
-    <string name="hint_confirm_password">Confirm Password</string>
-    <string name="btn_register">Register</string>
-    <string name="already_have_account_prompt">Already have an account? </string>
-    <string name="btn_login_now">Sign In</string>
-
-    <!-- Home Screen -->
-    <string name="welcome_student">Welcome, Student!</string>
-    <string name="welcome_owner">Welcome, Canteen Owner!</string>
-    <string name="home_subtitle">Firestore integration ready. You are now logged in.</string>
-    <string name="btn_logout">Logout</string>
-
-    <!-- Validation / Toast Messages -->
-    <string name="err_empty_email">Email cannot be empty</string>
-    <string name="err_invalid_email">Please enter a valid email address</string>
-    <string name="err_empty_password">Password cannot be empty</string>
-    <string name="err_short_password">Password must be at least 6 characters</string>
-    <string name="err_empty_name">Name cannot be empty</string>
-    <string name="err_password_mismatch">Passwords do not match</string>
-    <string name="msg_login_success">Login successful!</string>
-    <string name="msg_register_success">Registration successful!</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+    <string name="already_have_account">Already have an account? Login</string>
 </resources>
