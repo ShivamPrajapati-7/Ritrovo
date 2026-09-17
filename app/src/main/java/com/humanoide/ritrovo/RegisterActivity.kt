@@ -1,5 +1,6 @@
 package com.humanoide.ritrovo
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -68,7 +69,10 @@ class RegisterActivity : AppCompatActivity() {
             myauth.createUserWithEmailAndPassword(emailInput, passInput)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Registered Successfully!", Toast.LENGTH_SHORT).show()
-                    finish() // Close RegisterActivity and return to Login
+                    val intent = Intent(this, HomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
                 }
                 .addOnFailureListener { exception ->
                     Toast.makeText(this, "Registration Failed: ${exception.localizedMessage}", Toast.LENGTH_LONG).show()

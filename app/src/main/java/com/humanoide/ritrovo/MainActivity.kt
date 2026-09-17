@@ -20,6 +20,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var tvRegister: TextView
 
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        if (myauth.currentUser != null) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,6 +66,9 @@ class MainActivity : AppCompatActivity() {
             myauth.signInWithEmailAndPassword(emailInput, passInput)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
                 .addOnFailureListener { exception ->
                     Toast.makeText(this, "Login Failed: ${exception.localizedMessage}", Toast.LENGTH_LONG).show()
