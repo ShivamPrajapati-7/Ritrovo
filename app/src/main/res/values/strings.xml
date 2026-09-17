@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Ritrovo</string>
+    <string name="app_subtitle">Connect all campus canteens in one place</string>
     <string name="login">Login</string>
+    <string name="login_subtitle">Sign in to explore menus &amp; order food</string>
     <string name="register">Register</string>
+    <string name="register_subtitle">Create an account to get started</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
